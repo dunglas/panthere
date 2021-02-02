@@ -85,6 +85,15 @@ class CrawlerTest extends TestCase
     /**
      * @dataProvider clientFactoryProvider
      */
+    public function testFilterWithXpathValue(callable $clientFactory): void
+    {
+        $crawler = $this->request($clientFactory, '/basic.html');
+        $this->assertSame('A basic page', $crawler->filter('/html/head/title')->text());
+    }
+
+    /**
+     * @dataProvider clientFactoryProvider
+     */
     public function testFilter(callable $clientFactory): void
     {
         $crawler = $this->request($clientFactory, '/basic.html');
